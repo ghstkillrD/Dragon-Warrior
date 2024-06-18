@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -28,6 +29,7 @@ public class Health : MonoBehaviour
         {
             anim.SetTrigger("hurt");
             //iframes
+            StartCoroutine(Invulnerability());
         }
         else
         {
@@ -43,6 +45,19 @@ public class Health : MonoBehaviour
     public void AddHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+
+    private IEnumerator Invulnerability()
+    {
+        Physics2D.IgnoreLayerCollision(7, 8, true);
+        for (int i = 0; i < noOfFlashes; i++)
+        {
+            spriteRender.color = new Color(1, 0, 0, 1f);
+            yield return new WaitForSeconds(iFramesDuration / (noOfFlashes * 2));
+            spriteRender.color = Color.white;
+            yield return new WaitForSeconds(iFramesDuration / (noOfFlashes * 2));
+        }
+        Physics2D.IgnoreLayerCollision(7, 8, false);
     }
 
 }
