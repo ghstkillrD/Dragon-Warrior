@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
         {
             anim.SetTrigger("hurt");
             //iframes
-            StartCoroutine(Invulnerability());
+            StartCoroutine(Invulnerability_hurt());
         }
         else
         {
@@ -45,14 +45,28 @@ public class Health : MonoBehaviour
     public void AddHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+        StartCoroutine(Invulnerability_healthup());
     }
 
-    private IEnumerator Invulnerability()
+    private IEnumerator Invulnerability_hurt()
     {
         Physics2D.IgnoreLayerCollision(7, 8, true);
         for (int i = 0; i < noOfFlashes; i++)
         {
             spriteRender.color = new Color(1, 0, 0, 1f);
+            yield return new WaitForSeconds(iFramesDuration / (noOfFlashes * 2));
+            spriteRender.color = Color.white;
+            yield return new WaitForSeconds(iFramesDuration / (noOfFlashes * 2));
+        }
+        Physics2D.IgnoreLayerCollision(7, 8, false);
+    }
+
+    private IEnumerator Invulnerability_healthup()
+    {
+        Physics2D.IgnoreLayerCollision(7, 8, true);
+        for (int i = 0; i < noOfFlashes; i++)
+        {
+            spriteRender.color = new Color(0, 1, 0, 1f);
             yield return new WaitForSeconds(iFramesDuration / (noOfFlashes * 2));
             spriteRender.color = Color.white;
             yield return new WaitForSeconds(iFramesDuration / (noOfFlashes * 2));
