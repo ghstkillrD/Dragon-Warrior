@@ -65,6 +65,8 @@
     <Compile Include="Assets\Scripts\Health\Health.cs" />
     <Compile Include="Assets\Scripts\Health\Healthbar.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyProjectile.cs" />
+    <Compile Include="Assets\Scripts\Enemies\ArrowTrap.cs" />
     <Compile Include="Assets\Scripts\Rooms\Door.cs" />
     <Compile Include="Assets\Scripts\Core\CameraController.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyDamage.cs" />
